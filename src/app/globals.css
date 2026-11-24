@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+/* Design system: Kediaman Teduh.
+   Bahasa visual kediaman privat: kertas ivory, hijau botol, kuningan matte.
+   Kedalaman dibuat dengan bidang warna dan garis rambut, bukan bayangan.
+   Label sans untuk penanda, mono hanya untuk angka dan harga seperti folio. */
+@theme {
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-paper-50: #f7f2e8;
+  --color-paper-100: #f1eadc;
+  --color-paper-200: #e7decd;
+  --color-paper-300: #d9cdb7;
+  --color-card: #fcf8ef;
+
+  --color-line: #d6c9b2;
+  --color-line-strong: #b4a17e;
+
+  --color-ink-900: #161b14;
+  --color-ink-800: #20261c;
+  --color-ink-700: #333b2d;
+  --color-ink-600: #4b5443;
+  --color-ink-500: #59624f;
+  --color-ink-400: #646d57;
+
+  --color-forest-950: #0b120c;
+  --color-forest-900: #101a12;
+  --color-forest-800: #17251a;
+  --color-forest-700: #223526;
+  --color-forest-600: #314a33;
+
+  --color-brass-100: #f2e7d2;
+  --color-brass-200: #e4d2ae;
+  --color-brass-300: #cfb183;
+  --color-brass-400: #b08a50;
+  --color-brass-500: #96703a;
+  --color-brass-600: #87622b;
+  --color-brass-700: #6b4b1f;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6.5rem;
+  }
+
+  body {
+    background-color: var(--color-paper-50);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-brass-200);
+    color: var(--color-ink-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass-600);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--color-ink-900);
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Satu ketebalan garis untuk seluruh ikon agar tidak campur 1.4/1.6. */
+  svg.lucide {
+    stroke-width: 1.5;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  select:not(:disabled),
+  label[for],
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 78rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .container-narrow {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 46rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-narrow {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Label sans: penanda seksi, navigasi, dan status. */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  /* Label mono: angka, harga, dan anotasi teknis seperti folio. */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .panel {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-line);
+  }
+
+  .prose-copy {
+    color: var(--color-ink-600);
+    line-height: 1.75;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* Tautan teks: garis bawah yang menyusut saat hover, bukan efek warna. */
+  .link-rule {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    transition: background-size 0.25s ease;
+  }
+
+  .link-rule:hover,
+  .link-rule:focus-visible {
+    background-size: 0 1px;
+  }
+
+  .media-zoom img {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .media-zoom:hover img {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
